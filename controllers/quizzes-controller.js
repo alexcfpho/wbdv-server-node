@@ -9,10 +9,10 @@ module.exports = (app) => {
 
     // /api/quizzes/:qzid
     const findQuizById = (req, res) => {
-        const qzid = req.params['qzid'];
+        const qzid = req.params['qid'];
         res.send(quizzesService.findQuizById(qzid))
     }
 
     app.get('/api/quizzes', findAllQuizzes);
-    app.get('/api/quizzes/:qzid', findQuizById);
+    app.get('/api/quizzes/:qid', findQuizById);
 }

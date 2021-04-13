@@ -21,7 +21,7 @@ module.exports = (app) => {
 
     // /api/quizzes/:qzid/questions
     const findQuestionsForQuiz = (req, res) => {
-        const qzid = req.params['qzid'];
+        const qzid = req.params['qid'];
         const questions = questionsService.findQuestionsForQuiz(qzid);
         res.send(questions);
     }
@@ -50,7 +50,7 @@ module.exports = (app) => {
     // Pass ref of server to generate routes and call controller methods.
     app.get("/api/questions", findAllQuestions);
     app.get("/api/questions/:qid", findQuestionById)
-    app.get("/api/quizzes/:qzid/questions", findQuestionsForQuiz);
+    app.get("/api/quizzes/:qid/questions", findQuestionsForQuiz);
     // app.post("/api/questions/question", createQuestion);
     // app.put("/api/questions/:qid/update", updateQuestion);
     // app.delete("/api/questions/:qid/delete", deleteQuestion);
