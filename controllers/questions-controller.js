@@ -2,56 +2,50 @@ const questionsService = require("../services/questions-service");
 
 module.exports = (app) => {
 
-    // /api/quizzes/:qzid/question
-    // const createQuestionForQuiz = (req, res) => {
+    // /api/questions
+    // const findAllQuestions = (req, res) => {
+        // const questions = questionsService.findAllQuestions();
+        // res.send(questions)
+    //     questionsService.findAllQuestions()
+    //         .then((questions) => {
+    //             res.send(questions)
+    //         })
     // }
 
-    // /api/questions
-    const findAllQuestions = (req, res) => {
-        const questions = questionsService.findAllQuestions();
-        res.send(questions)
-    }
+    app.get('/api/quizzes/:qid/questions', (req, res) =>
+        questionsService.findQuestionsForQuiz(req.params['qid'])
+            .then(questions => res.json(questions)))
 
     // /api/questions/:qid
-    const findQuestionById = (req, res) => {
-        const qid = req.params['qid'];
-        const question = questionsService.findQuestionById(qid);
-        res.send(question);
-    }
+    // const findQuestionById = (req, res) => {
+    //     const qid = req.params['qid'];
+        // const question = questionsService.findQuestionById(qid);
+        // res.send(question);
+    //     questionsService
+    //         .findQuestionById(qid)
+    //         .then((question) => {
+    //             res.send(question)
+    //         })
+    // }
+
+    app.get('/api/questions/:qid', (req, res) =>
+        questionsService.findQuestionById(req.params['qid'])
+            .then(question => res.json(question)))
 
     // /api/quizzes/:qzid/questions
-    const findQuestionsForQuiz = (req, res) => {
-        const qzid = req.params['qid'];
-        const questions = questionsService.findQuestionsForQuiz(qzid);
-        res.send(questions);
-    }
+    // const findQuestionsForQuiz = (req, res) => {
+        // const qzid = req.params['qid'];
+        // const questions = questionsService.findQuestionsForQuiz(qzid);
+        // res.send(questions);
+    //     questionsService
+    //         .findQuestionsForQuiz(qzid)
+    //         .then((questions) => {
+    //             res.send(questions)
+    //         })
 
-    // const createQuestion = (req, res) => {
-    //     const question =  questionsService.createQuestion();
-    //     question.save()
-    //         .then(data => {
-    //             res.send(data);
-    //         }).catch(err => {
-    //         res.status(500).send({
-    //             message: err.message || "some error occurred while creating the question."
-    //         });
-    //     });
-    // };
+    app.get('/api/quizzes/:qzid/questions', (req, res) =>
+        questionsService.findQuestionsForQuiz(req.params['qzid'])
+            .then(questions => res.json(questions)))
 
-    // const updateQuestion = (req, res) => {
-    //     const qid = req.params.qzid;
-    //     const updatedQuestion = questionsService.updateQuestion(qid);
-    //     res.send(updatedQuestion);
     // }
-
-    // const deleteQuestion = (req, res) => {
-    // }
-
-    // Pass ref of server to generate routes and call controller methods.
-    app.get("/api/questions", findAllQuestions);
-    app.get("/api/questions/:qid", findQuestionById)
-    app.get("/api/quizzes/:qid/questions", findQuestionsForQuiz);
-    // app.post("/api/questions/question", createQuestion);
-    // app.put("/api/questions/:qid/update", updateQuestion);
-    // app.delete("/api/questions/:qid/delete", deleteQuestion);
 }
