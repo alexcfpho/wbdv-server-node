@@ -12,8 +12,8 @@ module.exports = (app) => {
     //         })
     // }
 
-    app.get('/api/quizzes/:qid/questions', (req, res) =>
-        questionsService.findQuestionsForQuiz(req.params['qid'])
+    app.get('/api/questions', (req, res) =>
+        questionsService.findAllQuestions()
             .then(questions => res.json(questions)))
 
     // /api/questions/:qid
@@ -42,10 +42,9 @@ module.exports = (app) => {
     //         .then((questions) => {
     //             res.send(questions)
     //         })
+    // }
 
     app.get('/api/quizzes/:qzid/questions', (req, res) =>
         questionsService.findQuestionsForQuiz(req.params['qzid'])
             .then(questions => res.json(questions)))
-
-    // }
 }
