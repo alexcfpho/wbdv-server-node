@@ -3,9 +3,12 @@ const app = express()
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+dotenv.config()
+
 mongoose.connect(
-    'mongodb://localhost:27017/whiteboard-02',
-    {useNewUrlParser: true, useUnifiedTopology: true}
+    `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_URL}`,
+    {useNewUrlParser: true, useUnifiedTopology: true, ssl: true}
 )
 
 // Configures CORS
@@ -26,5 +29,5 @@ require('./controllers/quizzes-controller')(app)
 require('./controllers/quiz-attempts-controller')(app)
 
 app.listen(process.env.PORT || 3001, () => {
-    console.log(`Server is listening on port ${process.env.PORT}`);
+    console.log(`Server is listening...`);
 });
