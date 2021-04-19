@@ -25,6 +25,6 @@ require('./controllers/questions-controller')(app)
 require('./controllers/quizzes-controller')(app)
 require('./controllers/quiz-attempts-controller')(app)
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Server is listening on port 4000");
+app.listen(process.env.PORT || 3001, () => {
+    console.log(`Server is listening on port ${process.env.PORT}`);
 });
